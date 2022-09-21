@@ -15,22 +15,22 @@ const Disqus = ({ frontMatter }: Props) => {
   function LoadComments() {
     setEnabledLoadComments(false)
 
-    // @ts-ignore
+    // @ts-expect-error
     window.disqus_config = function () {
       this.page.url = window.location.href
       this.page.identifier = frontMatter.slug
     }
-    // @ts-ignore
+    // @ts-expect-error
     if (window.DISQUS === undefined) {
       const script = document.createElement('script')
       script.src = 'https://' + siteMetadata.comment.disqusConfig.shortname + '.disqus.com/embed.js'
-      // @ts-ignore
+      // @ts-expect-error
       script.setAttribute('data-timestamp', +new Date())
       script.setAttribute('crossorigin', 'anonymous')
       script.async = true
       document.body.appendChild(script)
     } else {
-      // @ts-ignore
+      // @ts-expect-error
       window.DISQUS.reset({ reload: true })
     }
   }
