@@ -27,9 +27,10 @@ const DisqusComponent = dynamic(
 
 const Comments = ({ frontMatter }: Props) => {
   let term
+  let commentComponent
   switch (
-    siteMetadata.comment.giscusConfig.mapping ||
-    siteMetadata.comment.utterancesConfig.issueTerm
+    (siteMetadata.comment.giscusConfig.mapping as 'pathname' | 'url' | 'title') ||
+    (siteMetadata.comment.utterancesConfig.issueTerm as 'pathname' | 'url' | 'title')
   ) {
     case 'pathname':
       term = frontMatter.slug
@@ -41,19 +42,22 @@ const Comments = ({ frontMatter }: Props) => {
       term = frontMatter.title
       break
   }
-  return (
-    <div id="comment">
-      {siteMetadata.comment && siteMetadata.comment.provider === 'giscus' && (
-        <GiscusComponent mapping={term} />
-      )}
-      {siteMetadata.comment && siteMetadata.comment.provider === 'utterances' && (
-        <UtterancesComponent issueTerm={term} />
-      )}
-      {siteMetadata.comment && siteMetadata.comment.provider === 'disqus' && (
-        <DisqusComponent frontMatter={frontMatter} />
-      )}
-    </div>
-  )
+
+  switch (siteMetadata.comment.provider as 'giscus' | 'utterances' | 'disqus') {
+    case 'giscus':
+      commentComponent = <GiscusComponent mapping={term} />
+      break
+    case 'utterances':
+      commentComponent = <UtterancesComponent issueTerm={term} />
+      break
+    case 'disqus':
+      commentComponent = <DisqusComponent frontMatter={frontMatter} />
+      break
+    default:
+      commentComponent = <></>
+  }
+
+  return <div id="comment">{commentComponent}</div>
 }
 
 export default Comments

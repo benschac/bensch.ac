@@ -1,4 +1,4 @@
-const siteMetadata = {
+export default {
   title: 'Next.js Starter Blog',
   author: 'Tails Azimuth',
   headerTitle: 'TailwindBlog',
@@ -75,6 +75,4 @@ const siteMetadata = {
       shortname: process.env.NEXT_PUBLIC_DISQUS_SHORTNAME,
     },
   },
-}
-
-module.exports = siteMetadata
+} as const
