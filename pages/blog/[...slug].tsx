@@ -22,12 +22,15 @@ export async function getStaticPaths() {
   }
 }
 
-// @ts-ignore
 export const getStaticProps: GetStaticProps<{
-  post: { mdxSource: string; toc: Toc; frontMatter: PostFrontMatter; date: string }
+  post: {
+    toc: Toc
+    mdxSource: string
+    frontMatter: PostFrontMatter
+  }
   authorDetails: AuthorFrontMatter[]
-  prev?: { slug: string; title: string }
-  next?: { slug: string; title: string }
+  prev?: { slug: string | string[]; title: string }
+  next?: { slug: string | string[]; title: string }
 }> = async ({ params }) => {
   const slug = (params.slug as string[]).join('/')
   const allPosts = await getAllFilesFrontMatter('blog')

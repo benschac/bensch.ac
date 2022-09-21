@@ -14,12 +14,10 @@ const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) =
 
 const MDXComponents: ComponentMap = {
   Image,
-  //@ts-ignore
   TOCInline,
   a: CustomLink,
   pre: Pre,
   wrapper: Wrapper,
-  //@ts-ignore
   BlogNewsletterForm,
 }
 
