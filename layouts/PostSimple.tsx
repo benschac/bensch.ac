@@ -8,12 +8,13 @@ import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { ReactNode } from 'react'
 import { PostFrontMatter } from 'types/PostFrontMatter'
+import { Next, Prev } from './Types'
 
 interface Props {
   frontMatter: PostFrontMatter
   children: ReactNode
-  next?: { slug: string; title: string }
-  prev?: { slug: string; title: string }
+  next: Next
+  prev: Prev
 }
 
 export default function PostLayout({ frontMatter, next, prev, children }: Props) {
