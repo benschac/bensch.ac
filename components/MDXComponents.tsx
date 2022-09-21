@@ -12,7 +12,7 @@ const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) =
   return <Layout {...rest} />
 }
 
-export const MDXComponents: ComponentMap = {
+const MDXComponents: ComponentMap = {
   Image,
   //@ts-ignore
   TOCInline,
