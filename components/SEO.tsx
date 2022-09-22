@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import siteMetadata from '@/data/siteMetadata'
+import siteMetaData from '@/data/siteMetadata'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { isoDate } from '@/lib/utils/date'
+import siteMetadata from '@/data/siteMetadata'
 
 interface CommonSEOProps {
   title: string
@@ -28,14 +29,15 @@ const CommonSEO = ({
   canonicalUrl,
 }: CommonSEOProps) => {
   const router = useRouter()
+  const { siteUrl, twitter } = siteMetaData
   return (
     <Head>
       <title>{title}</title>
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
-      <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
+      <meta property="og:url" content={`${siteUrl}${router.asPath}`} />
       <meta property="og:type" content={ogType} />
-      <meta property="og:site_name" content={siteMetadata.title} />
+      <meta property="og:site_name" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
       {Array.isArray(ogImage) ? (
@@ -44,14 +46,11 @@ const CommonSEO = ({
         <meta property="og:image" content={ogImage} key={ogImage} />
       )}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={siteMetadata.twitter} />
+      <meta name="twitter:site" content={twitter} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={twImage} />
-      <link
-        rel="canonical"
-        href={canonicalUrl ? canonicalUrl : `${siteMetadata.siteUrl}${router.asPath}`}
-      />
+      <link rel="canonical" href={canonicalUrl ? canonicalUrl : `${siteUrl}${router.asPath}`} />
     </Head>
   )
 }
@@ -62,8 +61,9 @@ interface PageSEOProps {
 }
 
 export const PageSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const { siteUrl, socialBanner } = siteMetadata
+  const ogImageUrl = siteUrl + socialBanner
+  const twImageUrl = siteUrl + socialBanner
   return (
     <CommonSEO
       title={title}
@@ -76,8 +76,9 @@ export const PageSEO = ({ title, description }: PageSEOProps) => {
 }
 
 export const TagSEO = ({ title, description }: PageSEOProps) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
+  const { siteUrl, socialBanner } = siteMetadata
+  const ogImageUrl = siteUrl + socialBanner
+  const twImageUrl = siteUrl + socialBanner
   const router = useRouter()
   return (
     <>
@@ -93,7 +94,7 @@ export const TagSEO = ({ title, description }: PageSEOProps) => {
           rel="alternate"
           type="application/rss+xml"
           title={`${description} - RSS feed`}
-          href={`${siteMetadata.siteUrl}${router.asPath}/feed.xml`}
+          href={`${siteUrl}${router.asPath}/feed.xml`}
         />
       </Head>
     </>
@@ -115,19 +116,16 @@ export const BlogSEO = ({
   images = [],
   canonicalUrl,
 }: BlogSeoProps) => {
+  const { siteUrl, socialBanner, author, siteLogo } = siteMetadata
   const publishedAt = isoDate(date)
   const modifiedAt = isoDate(lastmod || date)
   const imagesArr =
-    images.length === 0
-      ? [siteMetadata.socialBanner]
-      : typeof images === 'string'
-      ? [images]
-      : images
+    images.length === 0 ? [socialBanner] : typeof images === 'string' ? [images] : images
 
   const featuredImages = imagesArr.map((img) => {
     return {
       '@type': 'ImageObject',
-      url: `${siteMetadata.siteUrl}${img}`,
+      url: `${siteUrl}${img}`,
     }
   })
 
@@ -142,7 +140,7 @@ export const BlogSEO = ({
   } else {
     authorList = {
       '@type': 'Person',
-      name: siteMetadata.author,
+      name: author,
     }
   }
 
@@ -160,10 +158,10 @@ export const BlogSEO = ({
     author: authorList,
     publisher: {
       '@type': 'Organization',
-      name: siteMetadata.author,
+      name: author,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`,
+        url: `${siteUrl}${siteLogo}`,
       },
     },
     description: summary,
