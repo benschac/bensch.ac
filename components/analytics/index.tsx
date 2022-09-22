@@ -16,12 +16,15 @@ declare global {
 const isProduction = process.env.NODE_ENV === 'production'
 
 const Analytics = () => {
+  const {
+    analytics: { plausibleDataDomain, simpleAnalytics, umamiWebsiteId, googleAnalyticsId },
+  } = siteMetadata
   return (
     <>
-      {isProduction && siteMetadata.analytics.plausibleDataDomain && <Plausible />}
-      {isProduction && siteMetadata.analytics.simpleAnalytics && <SimpleAnalytics />}
-      {isProduction && siteMetadata.analytics.umamiWebsiteId && <Umami />}
-      {isProduction && siteMetadata.analytics.googleAnalyticsId && <GA />}
+      {isProduction && plausibleDataDomain && <Plausible />}
+      {isProduction && simpleAnalytics && <SimpleAnalytics />}
+      {isProduction && umamiWebsiteId && <Umami />}
+      {isProduction && googleAnalyticsId && <GA />}
     </>
   )
 }

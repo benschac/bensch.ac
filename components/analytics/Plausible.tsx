@@ -3,11 +3,12 @@ import Script from 'next/script'
 import siteMetadata from '@/data/siteMetadata'
 
 const PlausibleScript = () => {
+  const { analytics } = siteMetadata
   return (
     <>
       <Script
         strategy="lazyOnload"
-        data-domain={siteMetadata.analytics.plausibleDataDomain}
+        data-domain={analytics.plausibleDataDomain}
         src="https://plausible.io/js/plausible.js"
       />
       <Script strategy="lazyOnload" id="plausible-script">

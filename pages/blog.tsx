@@ -27,9 +27,10 @@ export default function Blog({
   initialDisplayPosts,
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { author, description } = siteMetadata
   return (
     <>
-      <PageSEO title={`Blog - ${siteMetadata.author}`} description={siteMetadata.description} />
+      <PageSEO title={`Blog - ${author}`} description={description} />
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}

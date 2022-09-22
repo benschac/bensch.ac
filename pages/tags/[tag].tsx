@@ -48,12 +48,10 @@ export const getStaticProps: GetStaticProps<{ posts: PostFrontMatter[]; tag: str
 export default function Tag({ posts, tag }: InferGetStaticPropsType<typeof getStaticProps>) {
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
+  const { author } = siteMetadata
   return (
     <>
-      <TagSEO
-        title={`${tag} - ${siteMetadata.title}`}
-        description={`${tag} tags - ${siteMetadata.author}`}
-      />
+      <TagSEO title={`${tag} - ${title}`} description={`${tag} tags - ${author}`} />
       <ListLayout posts={posts} title={title} />
     </>
   )

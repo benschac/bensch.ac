@@ -52,9 +52,10 @@ export default function PostPage({
   initialDisplayPosts,
   pagination,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { title, description } = siteMetadata
   return (
     <>
-      <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
+      <PageSEO title={title} description={description} />
       <ListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}

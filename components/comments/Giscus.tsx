@@ -10,12 +10,15 @@ interface Props {
 const Giscus = ({ mapping }: Props) => {
   const [enableLoadComments, setEnabledLoadComments] = useState(true)
   const { theme, resolvedTheme } = useTheme()
+  const {
+    comment: { giscusConfig },
+  } = siteMetadata
   const commentsTheme =
-    siteMetadata.comment.giscusConfig.themeURL === ''
+    giscusConfig.themeURL === ''
       ? theme === 'dark' || resolvedTheme === 'dark'
-        ? siteMetadata.comment.giscusConfig.darkTheme
-        : siteMetadata.comment.giscusConfig.theme
-      : siteMetadata.comment.giscusConfig.themeURL
+        ? giscusConfig.darkTheme
+        : giscusConfig.theme
+      : giscusConfig.themeURL
 
   const COMMENTS_ID = 'comments-container'
 
@@ -23,13 +26,13 @@ const Giscus = ({ mapping }: Props) => {
     setEnabledLoadComments(false)
     const script = document.createElement('script')
     script.src = 'https://giscus.app/client.js'
-    script.setAttribute('data-repo', siteMetadata.comment.giscusConfig.repo)
-    script.setAttribute('data-repo-id', siteMetadata.comment.giscusConfig.repositoryId)
-    script.setAttribute('data-category', siteMetadata.comment.giscusConfig.category)
-    script.setAttribute('data-category-id', siteMetadata.comment.giscusConfig.categoryId)
+    script.setAttribute('data-repo', giscusConfig.repo)
+    script.setAttribute('data-repo-id', giscusConfig.repositoryId)
+    script.setAttribute('data-category', giscusConfig.category)
+    script.setAttribute('data-category-id', giscusConfig.categoryId)
     script.setAttribute('data-mapping', mapping)
-    script.setAttribute('data-reactions-enabled', siteMetadata.comment.giscusConfig.reactions)
-    script.setAttribute('data-emit-metadata', siteMetadata.comment.giscusConfig.metadata)
+    script.setAttribute('data-reactions-enabled', giscusConfig.reactions)
+    script.setAttribute('data-emit-metadata', giscusConfig.metadata)
     script.setAttribute('data-theme', commentsTheme)
     script.setAttribute('crossorigin', 'anonymous')
     script.async = true

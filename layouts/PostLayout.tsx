@@ -11,12 +11,11 @@ import { ReactNode } from 'react'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { Next, Prev } from './Types'
+const { siteRepo, siteUrl, locale } = siteMetadata
 
-const editUrl = (fileName) => `${siteMetadata.siteRepo}/blob/master/data/blog/${fileName}`
+const editUrl = (fileName) => `${siteRepo}/blob/master/data/blog/${fileName}`
 const discussUrl = (slug) =>
-  `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/blog/${slug}`
-  )}`
+  `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteUrl}/blog/${slug}`)}`
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
   weekday: 'long',
@@ -38,11 +37,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
 
   return (
     <SectionContainer>
-      <BlogSEO
-        url={`${siteMetadata.siteUrl}/blog/${slug}`}
-        authorDetails={authorDetails}
-        {...frontMatter}
-      />
+      <BlogSEO url={`${siteUrl}/blog/${slug}`} authorDetails={authorDetails} {...frontMatter} />
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
@@ -53,7 +48,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                     <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
+                      {new Date(date).toLocaleDateString(locale, postDateTemplate)}
                     </time>
                   </dd>
                 </div>

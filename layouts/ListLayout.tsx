@@ -2,8 +2,8 @@ import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import { ComponentProps, useState } from 'react'
 import Pagination from '@/components/Pagination'
-import formatDate from '@/lib/utils/formatDate'
 import { PostFrontMatter } from 'types/PostFrontMatter'
+import { formatDate } from '@/lib/utils/date'
 interface Props {
   posts: PostFrontMatter[]
   title: string

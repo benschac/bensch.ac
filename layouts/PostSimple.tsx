@@ -3,12 +3,12 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import { BlogSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import formatDate from '@/lib/utils/formatDate'
 import Comments from '@/components/comments'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import { ReactNode } from 'react'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { Next, Prev } from './Types'
+import { formatDate } from '@/lib/utils/date'
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -19,10 +19,11 @@ interface Props {
 
 export default function PostLayout({ frontMatter, next, prev, children }: Props) {
   const { slug, date, title } = frontMatter
+  const { siteUrl } = siteMetadata
 
   return (
     <SectionContainer>
-      <BlogSEO url={`${siteMetadata.siteUrl}/blog/${slug}`} {...frontMatter} />
+      <BlogSEO url={`${siteUrl}/blog/${slug}`} {...frontMatter} />
       <ScrollTopAndComment />
       <article>
         <div>

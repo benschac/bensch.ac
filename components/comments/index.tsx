@@ -28,9 +28,10 @@ const DisqusComponent = dynamic(
 const Comments = ({ frontMatter }: Props) => {
   let term
   let commentComponent
+  const { comment } = siteMetadata
   switch (
-    (siteMetadata.comment.giscusConfig.mapping as 'pathname' | 'url' | 'title') ||
-    (siteMetadata.comment.utterancesConfig.issueTerm as 'pathname' | 'url' | 'title')
+    (comment.giscusConfig.mapping as 'pathname' | 'url' | 'title') ||
+    (comment.utterancesConfig.issueTerm as 'pathname' | 'url' | 'title')
   ) {
     case 'pathname':
       term = frontMatter.slug
@@ -43,7 +44,7 @@ const Comments = ({ frontMatter }: Props) => {
       break
   }
 
-  switch (siteMetadata.comment.provider as 'giscus' | 'utterances' | 'disqus') {
+  switch (comment.provider as 'giscus' | 'utterances' | 'disqus') {
     case 'giscus':
       commentComponent = <GiscusComponent mapping={term} />
       break

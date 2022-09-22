@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import siteMetadata from '@/data/siteMetadata'
 import { PostFrontMatter } from 'types/PostFrontMatter'
+import { currentIsoDate } from '@/lib/utils/date'
 
 interface Props {
   frontMatter: PostFrontMatter
@@ -9,6 +10,7 @@ interface Props {
 
 const Disqus = ({ frontMatter }: Props) => {
   const [enableLoadComments, setEnabledLoadComments] = useState(true)
+  const { comment } = siteMetadata
 
   const COMMENTS_ID = 'disqus_thread'
 
@@ -21,8 +23,8 @@ const Disqus = ({ frontMatter }: Props) => {
     }
     if (window.DISQUS === undefined) {
       const script = document.createElement('script')
-      script.src = 'https://' + siteMetadata.comment.disqusConfig.shortname + '.disqus.com/embed.js'
-      script.setAttribute('data-timestamp', new Date().toISOString())
+      script.src = 'https://' + comment.disqusConfig.shortname + '.disqus.com/embed.js'
+      script.setAttribute('data-timestamp', currentIsoDate())
       script.setAttribute('crossorigin', 'anonymous')
       script.async = true
       document.body.appendChild(script)

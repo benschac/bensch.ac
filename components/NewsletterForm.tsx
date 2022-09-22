@@ -7,11 +7,12 @@ const NewsletterForm = ({ title = 'Subscribe to the newsletter' }) => {
   const [error, setError] = useState(false)
   const [message, setMessage] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const { newsletter } = siteMetadata
 
   const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const res = await fetch(`/api/${siteMetadata.newsletter.provider}`, {
+    const res = await fetch(`/api/${newsletter.provider}`, {
       body: JSON.stringify({
         email: inputEl.current.value,
       }),
