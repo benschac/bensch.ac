@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { PostFrontMatter } from 'types/PostFrontMatter'
+import { isoDate } from '@/lib/utils/date'
 
 interface CommonSEOProps {
   title: string
@@ -114,8 +115,8 @@ export const BlogSEO = ({
   images = [],
   canonicalUrl,
 }: BlogSeoProps) => {
-  const publishedAt = new Date(date).toISOString()
-  const modifiedAt = new Date(lastmod || date).toISOString()
+  const publishedAt = isoDate(date)
+  const modifiedAt = isoDate(lastmod || date)
   const imagesArr =
     images.length === 0
       ? [siteMetadata.socialBanner]

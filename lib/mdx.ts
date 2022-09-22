@@ -2,7 +2,6 @@ import { bundleMDX } from 'mdx-bundler'
 import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
-import readingTime from 'reading-time'
 import getAllFilesRecursively from './utils/files'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
@@ -22,6 +21,7 @@ import rehypeKatex from 'rehype-katex'
 import rehypeCitation from 'rehype-citation'
 import rehypePrismPlus from 'rehype-prism-plus'
 import rehypePresetMinify from 'rehype-preset-minify'
+import { isoDate } from './utils/date'
 
 const root = process.cwd()
 
@@ -103,13 +103,16 @@ export async function getFileBySlug<T>(
       return options
     },
   })
+
+  const date = isoDate(frontmatter.date)
+
   return {
     mdxSource: code,
     toc,
-    date: frontmatter.date ? new Date(frontmatter.date).toISOString() : '',
+    date,
     frontMatter: {
       ...frontmatter,
-      date: frontmatter.date ? new Date(frontmatter.date).toISOString() : '',
+      date,
     } as T,
   }
 }
