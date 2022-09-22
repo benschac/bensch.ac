@@ -18,7 +18,7 @@ export default function About({ authorDetails }: InferGetStaticPropsType<typeof 
 
   return (
     <MDXLayoutRenderer
-      layout={frontMatter.layout || DEFAULT_LAYOUT}
+      layout={frontMatter.layout ?? DEFAULT_LAYOUT}
       mdxSource={mdxSource}
       frontMatter={frontMatter}
     />

@@ -1,7 +1,7 @@
 export default {
   title: 'bensch.ac',
   author: 'benjamin schachter',
-  headerTitle: 'bensch.ac blog',
+  headerTitle: 'bensch.ac',
   description: 'personal site and blog',
   language: 'en-us',
   theme: 'system', // system, dark or light
