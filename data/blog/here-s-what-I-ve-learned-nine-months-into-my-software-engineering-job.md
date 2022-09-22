@@ -8,6 +8,7 @@ tags:
   - post
 keywords: []
 author: 'Benjamin Schachter'
+draft: false
 ogImage:
   url: '/assets/blog/preview/cover.jpg'
 ---
