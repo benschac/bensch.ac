@@ -19,11 +19,10 @@ const LayoutWrapper = ({ children }: Props) => {
     <SectionContainer>
       <div className="flex h-screen flex-col justify-between">
         <header className="flex items-center justify-between py-10">
-          <div>
+          <nav>
             <Link href="/" aria-label={headerTitle}>
               <div className="flex items-center justify-between">
                 <div className="mr-3 flex items-center">
-                  {/* <Logo /> */}
                   <Image
                     className="rounded-full"
                     src="/static/images/ben.png"
@@ -38,7 +37,7 @@ const LayoutWrapper = ({ children }: Props) => {
                 )}
               </div>
             </Link>
-          </div>
+          </nav>
           <div className="flex items-center text-base leading-5">
             <div className="hidden sm:block">
               {headerNavLinks.map((link) => (
