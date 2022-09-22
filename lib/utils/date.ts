@@ -1,2 +1,2 @@
-export const isoDate = (date?: string) => new Date(date ?? undefined).toISOString()
+export const isoDate = (date?: string) => (date ? new Date(date).toISOString() : '')
 export const getCurrentFullYear = () => new Date().getFullYear()
