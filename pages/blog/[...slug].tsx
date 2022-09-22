@@ -7,6 +7,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { AuthorFrontMatter } from 'types/AuthorFrontMatter'
 import { PostFrontMatter } from 'types/PostFrontMatter'
 import { Toc } from 'types/Toc'
+import { Prev, Next } from '@/layouts/Types'
 
 const DEFAULT_LAYOUT = 'PostLayout'
 
@@ -29,14 +30,14 @@ export const getStaticProps: GetStaticProps<{
     frontMatter: PostFrontMatter
   }
   authorDetails: AuthorFrontMatter[]
-  prev?: { slug: string | string[]; title: string }
-  next?: { slug: string | string[]; title: string }
+  prev: Prev
+  next: Next
 }> = async ({ params }) => {
   const slug = (params.slug as string[]).join('/')
   const allPosts = await getAllFilesFrontMatter('blog')
   const postIndex = allPosts.findIndex((post) => formatSlug(post.slug) === slug)
-  const prev: { slug: string; title: string } = allPosts[postIndex + 1] || null
-  const next: { slug: string; title: string } = allPosts[postIndex - 1] || null
+  const prev = allPosts[postIndex + 1] ?? null
+  const next = allPosts[postIndex - 1] ?? null
   const post = await getFileBySlug<PostFrontMatter>('blog', slug)
 
   const authorList = post.frontMatter.authors || ['default']

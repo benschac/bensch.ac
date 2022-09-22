@@ -12,7 +12,7 @@ const Wrapper: React.ComponentType<{ layout: string }> = ({ layout, ...rest }) =
   return <Layout {...rest} />
 }
 
-const MDXComponents: ComponentMap = {
+export const MDXComponents: ComponentMap = {
   Image,
   TOCInline,
   a: CustomLink,
@@ -29,6 +29,5 @@ interface Props {
 
 export const MDXLayoutRenderer = ({ layout, mdxSource, ...rest }: Props) => {
   const MDXLayout = useMemo(() => getMDXComponent(mdxSource), [mdxSource])
-
   return <MDXLayout layout={layout} components={MDXComponents} {...rest} />
 }

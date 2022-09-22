@@ -9,7 +9,7 @@ interface Props {
   frontMatter: AuthorFrontMatter
 }
 
-export function AuthorLayout({ children, frontMatter }: Props) {
+export default function AuthorLayout({ children, frontMatter }: Props) {
   const { name, avatar, occupation, company, email, twitter, linkedin, github } = frontMatter
 
   return (
