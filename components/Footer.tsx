@@ -4,14 +4,13 @@ import SocialIcon from '@/components/social-icons'
 import { getCurrentFullYear } from '@/lib/utils/date'
 
 export default function Footer() {
-  const { email, github, facebook, youtube, linkedin, twitter, author, title } = siteMetadata
+  const { email, github, youtube, linkedin, twitter, author, title } = siteMetadata
   return (
     <footer>
       <div className="mt-16 flex flex-col items-center">
         <div className="mb-3 flex space-x-4">
           <SocialIcon kind="mail" href={`mailto:${email}`} size={6} />
           <SocialIcon kind="github" href={github} size={6} />
-          <SocialIcon kind="facebook" href={facebook} size={6} />
           <SocialIcon kind="youtube" href={youtube} size={6} />
           <SocialIcon kind="linkedin" href={linkedin} size={6} />
           <SocialIcon kind="twitter" href={twitter} size={6} />
